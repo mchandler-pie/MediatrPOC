@@ -1,12 +1,12 @@
 using System.Reflection;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
-using MediatrPOC.Messages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Packages.Messages;
 
 namespace MediatrPOC
 {

@@ -14,4 +14,13 @@
     <PackageReference Include="Pie.Quote.Messages.Contracts" Version="1.1.5527" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Packages\Packages.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Handlers\" />
+    <Folder Include="Validators\" />
+  </ItemGroup>
+
 </Project>

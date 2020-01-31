@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
-using MediatrPOC.Messages;
 using Microsoft.AspNetCore.Mvc;
+using Packages.Messages;
 using Pie.Quote.Messages.Contracts.Post;
 
 namespace MediatrPOC.Controllers
