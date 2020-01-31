@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using FluentValidation;
 using MediatR;
 using MediatrPOC.Messages;
-using MediatrPOC.Services;
 using Microsoft.AspNetCore.Mvc;
 using Pie.Quote.Messages.Contracts.Post;
 
@@ -11,25 +12,32 @@ namespace MediatrPOC.Controllers
     [ApiController]
     public class QuotesController : ControllerBase
     {
-        private readonly IPieMediatorService _pieMediatorService;
         private readonly IMediator _mediator;
 
-        public QuotesController(IMediator mediator, IPieMediatorService pieMediatorService)
+        public QuotesController(IMediator mediator)
         {
-            _pieMediatorService = pieMediatorService;
             _mediator = mediator;
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<bool>> PostAsync([FromBody] QuoteRequestPost request)
+        public async Task<ActionResult<QuoteRequestPost>> PostAsync([FromBody] QuoteRequestPost request)
         {
-            var result = false;
 
-            await _mediator.Send(new ValidateQuoteRequestCommand {request = request});
+            try
+            {
+                var validationResult = await _mediator.Send(new ValidateQuoteRequestCommand
+                    {request = request.Contacts.First()});
 
-            _pieMediatorService.Notify("This is a test notification");
+                request.PartnerAgentFirstName = "ValidateSuccess";
 
-            return result;
+                //Next step in pipeline
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Errors);
+            }
+
+            return request;
         }
 
     }

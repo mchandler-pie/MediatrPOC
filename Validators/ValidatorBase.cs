@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Pie.Quote.Web.Server.Validators
+namespace MediatrPOC.Validators
 {
 	public abstract class ValidatorBase<T> : AbstractValidator<T>
 	{

@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace Pie.Quote.Web.Server.Validators
+namespace MediatrPOC.Validators
 {
 	public static class ValidationLibrary
 	{
