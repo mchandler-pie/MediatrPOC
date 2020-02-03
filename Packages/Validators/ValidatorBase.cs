@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace MediatrPOC.Validators
+namespace Packages.Validators
 {
 	public abstract class ValidatorBase<T> : AbstractValidator<T>
 	{

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.1" />
+    <PackageReference Include="MediatR" Version="8.0.0" />
+    <PackageReference Include="Pie.Quote.Messages.Contracts" Version="1.1.5527" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pie.Pipeline.Requests\" />
+  </ItemGroup>
+
+</Project>

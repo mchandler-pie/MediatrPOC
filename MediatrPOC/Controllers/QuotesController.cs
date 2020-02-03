@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
-using MediatrPOC.Messages;
 using Microsoft.AspNetCore.Mvc;
+using Packages.Pie.Pipeline.Messages;
 using Pie.Quote.Messages.Contracts.Post;
 
 namespace MediatrPOC.Controllers
@@ -26,7 +25,7 @@ namespace MediatrPOC.Controllers
             try
             {
                 var validationResult = await _mediator.Send(new ValidateQuoteRequestCommand
-                    {request = request.Contacts.First()});
+                    {InitialRequest = request});
 
                 request.PartnerAgentFirstName = "ValidateSuccess";
 

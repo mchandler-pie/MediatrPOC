@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace MediatrPOC.Validators
+namespace Packages.Validators
 {
 	public static class ValidationLibrary
 	{

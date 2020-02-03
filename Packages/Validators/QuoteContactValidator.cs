@@ -1,31 +1,33 @@
+using System.Linq;
 using FluentValidation;
-using MediatrPOC.Messages;
+using Packages.Pie.Pipeline.Messages;
+using Pie.Quote.Messages.Contracts.Post;
 
-namespace MediatrPOC.Validators
+namespace Packages.Validators
 {
-	public class QuoteContactPostValidator : ValidatorBase<ValidateQuoteRequestCommand>
+	public class QuoteContactPostValidator : ValidatorBase<QuoteContactPost>
 	{
 		public QuoteContactPostValidator()
 		{
-			RuleFor(pc => pc.request.FirstName)
+			RuleFor(pc => pc.FirstName)
 				.NotEmpty()
 				.WithMessage(ValidationLibrary.RequiredError)
 				.Must(fn => !string.IsNullOrWhiteSpace(fn))
 				.WithMessage(ValidationLibrary.RequiredError);
 
-			RuleFor(pc => pc.request.LastName)
+			RuleFor(pc => pc.LastName)
 				.NotEmpty()
 				.WithMessage(ValidationLibrary.RequiredError)
 				.Must(ln => !string.IsNullOrWhiteSpace(ln))
 				.WithMessage(ValidationLibrary.RequiredError);
 
-			RuleFor(pc => pc.request.Email)
+			RuleFor(pc => pc.Email)
 				.NotEmpty()
 				.WithMessage(ValidationLibrary.RequiredError)
 				.Must(e => !string.IsNullOrWhiteSpace(e))
 				.WithMessage(ValidationLibrary.RequiredError);
 
-            RuleFor(pc => pc.request.Phone)
+            RuleFor(pc => pc.Phone)
 				.Must(p => p == null || p.IsPhoneNumber())
 				.WithMessage(ValidationLibrary.ValidPhoneError);
         }
