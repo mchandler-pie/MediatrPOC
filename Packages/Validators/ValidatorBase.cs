@@ -8,6 +8,6 @@ namespace Packages.Validators
 		// This changes the default behavior on the validators to only produce a single error
 		// You can still change it back to CascadeMode.Continue if you want
 		protected ValidatorBase() =>
-			CascadeMode = CascadeMode.StopOnFirstFailure;
+			CascadeMode = CascadeMode.Continue;
 	}
 }

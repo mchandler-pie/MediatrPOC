@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
-using FluentValidation;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Packages.Pie.Pipeline.Messages;
-using Pie.Quote.Messages.Contracts.Post;
+using Packages.Pie.Pipeline.Responses;
+using Pie.Quote.Messages.Contracts;
 
 namespace MediatrPOC.Controllers
 {
@@ -19,24 +20,14 @@ namespace MediatrPOC.Controllers
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<QuoteRequestPost>> PostAsync([FromBody] QuoteRequestPost request)
+        public async Task<ActionResult<QuoteRequestPipelineResponse>> PostAsync()
         {
+            var request = new QuoteRequest();
+            var result = await _mediator.Send(new ValidateQuoteRequestCommand{InitialRequest = request});
 
-            try
-            {
-                var validationResult = await _mediator.Send(new ValidateQuoteRequestCommand
-                    {InitialRequest = request});
-
-                request.PartnerAgentFirstName = "ValidateSuccess";
-
-                //Next step in pipeline
-            }
-            catch (ValidationException ex)
-            {
-                return BadRequest(ex.Errors);
-            }
-
-            return request;
+            return result.ValidationFailures?.Any() ?? false
+                ? (ActionResult)BadRequest(result)
+                : Created(string.Empty, result);
         }
 
     }

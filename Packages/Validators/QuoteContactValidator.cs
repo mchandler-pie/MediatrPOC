@@ -1,6 +1,4 @@
-using System.Linq;
 using FluentValidation;
-using Packages.Pie.Pipeline.Messages;
 using Pie.Quote.Messages.Contracts.Post;
 
 namespace Packages.Validators
